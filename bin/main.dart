@@ -1,5 +1,6 @@
 import './data.dart'; // بيانات الخطوط
 import './RouteCalculation.dart';
+import './TripCostAndTime.dart';
 
 void main() {
   // ✅ Test 1: Maadi → Helwan (نفس الخط - Line 1)
@@ -40,11 +41,18 @@ void main() {
 
 void printResult(Map<String, dynamic> result) {
   if (result.containsKey('error')) {
-    print('❌ Error: ${result['error']}');
+    print('❌ Error:  [31m${result['error']} [0m');
   } else {
     print('📍 Route: ${result['path'].join(" → ")}');
     print('🚏 Total Stations: ${result['totalStations']}');
     print('🚇 Lines Used: ${result['linesUsed'].join(", ")}');
     print('🔁 Transfer Station: ${result['transferStation'] ?? "No Transfer"}');
+    // Calculate trip time and price
+    int totalStations = result['totalStations'];
+    int transfers = (result['linesUsed'] as List).length - 1;
+    int time = calculateTripTime(totalStations, transfers);
+    int price = calculateTicketPrice(totalStations);
+    print('⏱ Trip Time: $time min');
+    print('💵 Ticket Price: $price EGP');
   }
 }
