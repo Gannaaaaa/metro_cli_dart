@@ -1,12 +1,14 @@
 import './data.dart';
 
 Map<String, List<String>> allLines = {
-  'Line 1': line1Stations,
-  'Line 2': line2Stations,
-  'Line 3': line3Stations,
+  "1": line1Stations,
+  "2": line2Stations,
+  "3": line3Stations,
+  "3-1": line3Subline1,
+  "3-2": line3Subline2,
 };
 
-// de lya ana bs 
+//de lya ana mhdsh ystkhdmha
 Map<String, dynamic> sameLine(String sourceStation, String destinationStation) {
   String? lineOfSource;
   String? lineOfDestination;
@@ -26,23 +28,24 @@ Map<String, dynamic> sameLine(String sourceStation, String destinationStation) {
   if (lineOfSource == null || lineOfDestination == null) {
     return {
       'same': false,
-      'message': 'One or both stations not found.',
+      'message': 'One or both stations not found.'
     };
   }
 
   if (lineOfSource == lineOfDestination) {
     return {
       'same': true,
-      'line': lineOfSource,
+      'line': lineOfSource
     };
   } else {
     return {
       'same': false,
       'sourceLine': lineOfSource,
-      'destinationLine': lineOfDestination,
+      'destinationLine': lineOfDestination
     };
   }
 }
+
 
 Map<String, dynamic> findPath(String sourceStation, String destinationStation) {
   final result = sameLine(sourceStation, destinationStation);
