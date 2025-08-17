@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-// ✅ adjust these imports to match your files
-import '../data.dart';                 // stations/lines/transferStations
-import '../TripCostAndTime.dart';          // allLines, findPath(...)
-import '../RouteCalculation.dart';    // calculateTripTime, calculateTicketPrice
+import '../data.dart';                 // stations, lines, transferStations, stationCoords
+import '../TripCostAndTime.dart';      // allLines, findPath(...)
+import '../RouteCalculation.dart';     // calculateTripTime, calculateTicketPrice
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,12 +14,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // State Variables
   String? _from;
   String? _to;
-
-  Map<String, dynamic>? _result; // holds the findPath result
-  int? _time;                     // minutes
-  int? _price;                    // EGP
+  Map<String, dynamic>? _result; // Holds the findPath result
+  int? _time;                    // Minutes
+  int? _price;                   // EGP
+  Position? _currentPosition;    // User's current position
 
   // Unique, sorted station list across all lines
   late final List<String> _allStations = (() {
@@ -27,6 +29,106 @@ class _HomePageState extends State<HomePage> {
     return s;
   })();
 
+  // Set From to Nearest Station
+  Future<void> _setFromToNearest() async {
+    // Check if location services are enabled
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Location services are disabled. Please enable them.')),
+      );
+      return;
+    }
+
+    // Check and request location permissions
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Location permissions are denied.')),
+        );
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Location permissions are permanently denied, please enable them in settings.')),
+      );
+      return;
+    }
+
+    // Get current position
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    _currentPosition = position;
+
+    // Find nearest station
+    double minDistance = double.infinity;
+    String? nearest;
+    for (var station in _allStations) {
+      var coords = stationCoords[station];
+      if (coords != null) {
+        double dist = Geolocator.distanceBetween(
+          position.latitude,
+          position.longitude,
+          coords[0],
+          coords[1],
+        );
+        if (dist < minDistance) {
+          minDistance = dist;
+          nearest = station;
+        }
+      }
+    }
+
+    if (nearest != null) {
+      setState(() {
+        _from = nearest;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('From set to nearest station: $nearest')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No station coordinates available.')),
+      );
+    }
+  }
+
+  // Navigate to Nearest Station
+  Future<void> _navigateToFromStation() async {
+    if (_from == null || _currentPosition == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No from station or current location available.')),
+      );
+      return;
+    }
+
+    var coords = stationCoords[_from];
+    if (coords == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No coordinates for the from station.')),
+      );
+      return;
+    }
+
+    final String origin = '${_currentPosition!.latitude},${_currentPosition!.longitude}';
+    final String destination = '${coords[0]},${coords[1]}';
+    final Uri url = Uri.parse(
+      'https://www.google.com/maps/dir/?api=1&origin=$origin&destination=$destination&travelmode=walking',
+    ); // Change to 'driving' if preferred
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not launch maps.')),
+      );
+    }
+  }
+
+  // Compute Route
   void _computeRoute() {
     if (_from == null || _to == null) return;
 
@@ -61,6 +163,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // Build UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +173,18 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              // FROM
+              // Button to set From to nearest station
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: _setFromToNearest,
+                  icon: const Icon(Icons.location_searching),
+                  label: const Text('Set From to Nearest Station'),
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // FROM Dropdown
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'From station',
@@ -84,7 +198,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 12),
 
-              // TO
+              // TO Dropdown
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'To station',
@@ -98,6 +212,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
 
+              // Find Route Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -109,12 +224,26 @@ class _HomePageState extends State<HomePage> {
 
               const SizedBox(height: 20),
 
+              // Navigate to Nearest Station Button
+              if (_currentPosition != null && _from != null)
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: _navigateToFromStation,
+                    icon: const Icon(Icons.map),
+                    label: const Text('Navigate to Nearest Station on Maps'),
+                  ),
+                ),
+
+              const SizedBox(height: 20),
+
               // Results
-              if (_result != null) _ResultSection(
-                result: _result!,
-                time: _time,
-                price: _price,
-              ),
+              if (_result != null)
+                _ResultSection(
+                  result: _result!,
+                  time: _time,
+                  price: _price,
+                ),
             ],
           ),
         ),
@@ -200,16 +329,16 @@ class _RowLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(icon, size: 18),
-              const SizedBox(width: 8),
-              Text('$label: ', style: const TextStyle(fontWeight: FontWeight.w600)),
-              Expanded(child: Text(value)),
-            ],
-            ),
-        );
-    }
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 18),
+          const SizedBox(width: 8),
+          Text('$label: ', style: const TextStyle(fontWeight: FontWeight.w600)),
+          Expanded(child: Text(value)),
+        ],
+      ),
+    );
+  }
 }

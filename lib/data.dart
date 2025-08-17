@@ -1,132 +1,220 @@
-  // Line 1 Stations
-  List<String> line1Stations = [
-    "New Marg",
-    "El Marg",
-    "Ezbet El-Nakhl",
-    "Ain Shams",
-    "El Matareyya",
-    "Helmeyet El Zaitoun",
-    "Hadayeq El Zaitoun",
-    "Saray El Qobba",
-    "Hammamat El Qobba",
-    "Kobri El Qobba",
-    "Manshiet El Sadr",
-    "El Demerdash",
-    "Ghamra",
-    "Al Shohadaa",
-    "Orabi",
-    "Nasser",
-    "Sadat",
-    "Saad Zaghloul",
-    "Al Sayeda Zeinab",
-    "El Malek El Saleh",
-    "Mar Girgis",
-    "El-Zahraa",
-    "Dar El Salam",
-    "Hadayek El Maadi",
-    "Maadi",
-    "Sakanat El Maadi",
-    "Tora El Balad",
-    "Kozzika",
-    "Tora El Esmant",
-    "Elmasraa",
-    "Hadayek Helwan",
-    "Wadi Hof",
-    "Helwan University",
-    "Ain Helwan",
-    "Helwan"
-  ];
+// Line 1 Stations
+List<String> line1Stations = [
+  "New Marg",
+  "El Marg",
+  "Ezbet El-Nakhl",
+  "Ain Shams",
+  "El Matareyya",
+  "Helmeyet El Zaitoun",
+  "Hadayeq El Zaitoun",
+  "Saray El Qobba",
+  "Hammamat El Qobba",
+  "Kobri El Qobba",
+  "Manshiet El Sadr",
+  "El Demerdash",
+  "Ghamra",
+  "Al Shohadaa",
+  "Orabi",
+  "Nasser",
+  "Sadat",
+  "Saad Zaghloul",
+  "Al Sayeda Zeinab",
+  "El Malek El Saleh",
+  "Mar Girgis",
+  "El-Zahraa",
+  "Dar El Salam",
+  "Hadayek El Maadi",
+  "Maadi",
+  "Sakanat El Maadi",
+  "Tora El Balad",
+  "Kozzika",
+  "Tora El Esmant",
+  "Elmasraa",
+  "Hadayek Helwan",
+  "Wadi Hof",
+  "Helwan University",
+  "Ain Helwan",
+  "Helwan"
+];
 
-  // Line 2 Stations
-  List<String> line2Stations = [
-    "Shubra Al Khaimah",
-    "Koliet El Zeraa",
-    "Mezallat",
-    "Khalafawy",
-    "St. Teresa",
-    "Rod El Farag",
-    "Masarra",
-    "Al Shohadaa",
-    "Attaba",
-    "Mohamed Naguib",
-    "Sadat",
-    "Opera",
-    "Dokki",
-    "El Bohoth",
-    "Cairo University",
-    "Faisal",
-    "Giza",
-    "Omm El Masryeen",
-    "Sakiat Mekky",
-    "El Monib"
-  ];
+// Line 2 Stations
+List<String> line2Stations = [
+  "Shubra Al Khaimah",
+  "Koliet El Zeraa",
+  "Mezallat",
+  "Khalafawy",
+  "St. Teresa",
+  "Rod El Farag",
+  "Masarra",
+  "Al Shohadaa",
+  "Attaba",
+  "Mohamed Naguib",
+  "Sadat",
+  "Opera",
+  "Dokki",
+  "El Bohoth",
+  "Cairo University",
+  "Faisal",
+  "Giza",
+  "Omm El Masryeen",
+  "Sakiat Mekky",
+  "El Monib"
+];
 
-  // Line 3 Stations (Main line)
-  List<String> line3Stations = [
-    "Adly Mansour",
-    "Haykestep",
-    "Omar Ibn El Khattab",
-    "Qubaa",
-    "Hesham Barakat",
-    "El Nozha",
-    "El Shams Club",
-    "Alf Masken",
-    "Heliopolis",
-    "Haroun",
-    "Al Ahram",
-    "Koleyet El Banat",
-    "Cairo Stadium",
-    "El Maard",
-    "Abbassiya",
-    "Abdou Pasha",
-    "El Geish",
-    "Bab El Shaariya",
-    "Attaba",
-    "Nasser",
-    "Maspero",
-    "Safaa Hegazy",
-    "Kit Kat"
-  ];
+// Line 3 Stations (Main line)
+List<String> line3Stations = [
+  "Adly Mansour",
+  "Haykestep",
+  "Omar Ibn El Khattab",
+  "Qubaa",
+  "Hesham Barakat",
+  "El Nozha",
+  "El Shams Club",
+  "Alf Masken",
+  "Heliopolis",
+  "Haroun",
+  "Al Ahram",
+  "Koleyet El Banat",
+  "Cairo Stadium",
+  "El Maard",
+  "Abbassiya",
+  "Abdou Pasha",
+  "El Geish",
+  "Bab El Shaariya",
+  "Attaba",
+  "Nasser",
+  "Maspero",
+  "Safaa Hegazy",
+  "Kit Kat"
+];
 
-  // Line 3 - Subline 1 (from Kit Kat)
-  List<String> line3Subline1 = [
-    "Kit Kat",
-    "Sudan",
-    "Imbaba",
-    "El Bohy",
-    "El Qawmia",
-    "Ring Road",
-    "Rod El Farag Corridor"
-  ];
+// Line 3 - Subline 1 (from Kit Kat)
+List<String> line3Subline1 = [
+  "Kit Kat",
+  "Sudan",
+  "Imbaba",
+  "El Bohy",
+  "El Qawmia",
+  "Ring Road",
+  "Rod El Farag Corridor"
+];
 
-  // Line 3 - Subline 2 (from Kit Kat)
-  List<String> line3Subline2 = [
-    "Kit Kat",
-    "Tawfikia",
-    "Wadi El Nile",
-    "Gamet El Dowal",
-    "Boulak El Dakrour",
-    "Cairo University"
-  ];
+// Line 3 - Subline 2 (from Kit Kat)
+List<String> line3Subline2 = [
+  "Kit Kat",
+  "Tawfikia",
+  "Wadi El Nile",
+  "Gamet El Dowal",
+  "Boulak El Dakrour",
+  "Cairo University"
+];
 
-  // intersections
-  Map<String, List<String>> transferStations = {
-    "Al Shohadaa": ["1", "2"],
-    "Sadat": ["1", "2"],
-    "Attaba": ["2", "3"],
-    "Nasser": ["1", "3"],
-    "Kit Kat": ["3", "3-1", "3-2"], // Main line and both sublines
-    "Cairo University": ["2", "3-2"] // Appears in Line 2 and Subline 2
-  };
+// Transfer Stations
+Map<String, List<String>> transferStations = {
+  "Al Shohadaa": ["1", "2"],
+  "Sadat": ["1", "2"],
+  "Attaba": ["2", "3"],
+  "Nasser": ["1", "3"],
+  "Kit Kat": ["3", "3-1", "3-2"],
+  "Cairo University": ["2", "3-2"]
+};
 
-  Map<String, double> lineLengthsKm = {
-    "1": 44.0,
-    "2": 21.6,
-    "3": 41.2
-  };
+// Line Lengths (in kilometers)
+Map<String, double> lineLengthsKm = {
+  "1": 44.0,
+  "2": 21.6,
+  "3": 41.2
+};
 
-
-  // Helper Function: isTransferStation
-  bool isTransferStation(String stationName) {
-    return transferStations.containsKey(stationName);
-  }
+// Station Coordinates (latitude, longitude)
+// Note: These are partially sample-based; replace with accurate values from sources like Wikipedia or Google Maps
+Map<String, List<double>> stationCoords = {
+  "New Marg": [30.1647, 31.3442],
+  "El Marg": [30.1522, 31.3358],
+  "Ezbet El-Nakhl": [30.1344, 31.3225],
+  "Ain Shams": [30.1311, 31.3222],
+  "El Matareyya": [30.1214, 31.3128],
+  "Helmeyet El Zaitoun": [30.1158, 31.3092],
+  "Hadayeq El Zaitoun": [30.1100, 31.3050],
+  "Saray El Qobba": [30.0994, 31.2961],
+  "Hammamat El Qobba": [30.0911, 31.2894],
+  "Kobri El Qobba": [30.0858, 31.2842],
+  "Manshiet El Sadr": [30.0794, 31.2794],
+  "El Demerdash": [30.0733, 31.2772],
+  "Ghamra": [30.0694, 31.2644],
+  "Al Shohadaa": [30.0619, 31.2461],
+  "Orabi": [30.0573, 31.2425],
+  "Nasser": [30.0533, 31.2389],
+  "Sadat": [30.0444, 31.2347],
+  "Saad Zaghloul": [30.0375, 31.2361],
+  "Al Sayeda Zeinab": [30.0325, 31.2356],
+  "El Malek El Saleh": [30.0256, 31.2314],
+  "Mar Girgis": [30.0061, 31.2297],
+  "El-Zahraa": [29.9958, 31.2311],
+  "Dar El Salam": [29.9833, 31.2389],
+  "Hadayek El Maadi": [29.9700, 31.2500],
+  "Maadi": [29.9600, 31.2567],
+  "Sakanat El Maadi": [29.9533, 31.2611],
+  "Tora El Balad": [29.9400, 31.2667],
+  "Kozzika": [29.9267, 31.2711],
+  "Tora El Esmant": [29.9133, 31.2756],
+  "Elmasraa": [29.9000, 31.2800],
+  "Hadayek Helwan": [29.8867, 31.2844],
+  "Wadi Hof": [29.8733, 31.2889],
+  "Helwan University": [29.8600, 31.2933],
+  "Ain Helwan": [29.8635, 31.3250],
+  "Helwan": [29.8491, 31.3342],
+  // Line 2
+  "Shubra Al Khaimah": [30.1233, 31.2422],
+  "Koliet El Zeraa": [30.1144, 31.2422],
+  "Mezallat": [30.1056, 31.2422],
+  "Khalafawy": [30.0967, 31.2422],
+  "St. Teresa": [30.0878, 31.2422],
+  "Rod El Farag": [30.0789, 31.2422],
+  "Masarra": [30.0700, 31.2422],
+  "Attaba": [30.0533, 31.2467],
+  "Mohamed Naguib": [30.0467, 31.2433],
+  "Opera": [30.0417, 31.2378],
+  "Dokki": [30.0383, 31.2111],
+  "El Bohoth": [30.0350, 31.2000],
+  "Cairo University": [30.0256, 31.2011],
+  "Faisal": [30.0150, 31.2056],
+  "Giza": [30.0100, 31.2072],
+  "Omm El Masryeen": [30.0050, 31.2083],
+  "Sakiat Mekky": [29.9950, 31.2100],
+  "El Monib": [29.9800, 31.2122],
+  // Line 3
+  "Adly Mansour": [30.1450, 31.4100],
+  "Haykestep": [30.1400, 31.3950],
+  "Omar Ibn El Khattab": [30.1350, 31.3800],
+  "Qubaa": [30.1300, 31.3650],
+  "Hesham Barakat": [30.1250, 31.3500],
+  "El Nozha": [30.1200, 31.3350],
+  "El Shams Club": [30.1150, 31.3200],
+  "Alf Masken": [30.1100, 31.3050],
+  "Heliopolis": [30.0928, 31.3344],
+  "Haroun": [30.1000, 31.3250],
+  "Al Ahram": [30.0950, 31.3200],
+  "Koleyet El Banat": [30.0844, 31.3293],
+  "Cairo Stadium": [30.0733, 31.3122],
+  "El Maard": [30.0700, 31.3000],
+  "Abbassiya": [30.0697, 31.2809],
+  "Abdou Pasha": [30.0654, 31.2764],
+  "El Geish": [30.0622, 31.2667],
+  "Bab El Shaariya": [30.0544, 31.2561],
+  "Maspero": [30.0567, 31.2311],
+  "Safaa Hegazy": [30.0583, 31.2250],
+  "Kit Kat": [30.0600, 31.2200],
+  // Subline 1
+  "Sudan": [30.0650, 31.2150],
+  "Imbaba": [30.0700, 31.2100],
+  "El Bohy": [30.0750, 31.2050],
+  "El Qawmia": [30.0800, 31.2000],
+  "Ring Road": [30.0850, 31.1950],
+  "Rod El Farag Corridor": [30.0900, 31.1900],
+  // Subline 2
+  "Tawfikia": [30.0550, 31.2150],
+  "Wadi El Nile": [30.0500, 31.2100],
+  "Gamet El Dowal": [30.0450, 31.2050],
+  "Boulak El Dakrour": [30.0400, 31.2000],
+};
